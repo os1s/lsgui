@@ -17,6 +17,9 @@ class Window(Frame):
     def alkchat(self):
         webbrowser.open('https://www.twitch.tv/popout/alkaizerx/chat')
 
+    def b0atychat(self):
+        webbrowser.open('https://www.twitch.tv/popout/b0aty/chat')
+
     def init_window(self):
 
         self.master.title(':^)')
@@ -30,6 +33,9 @@ class Window(Frame):
 
         butt = Button(self, text='b0aty', width=12, height=2, command=self.b0aty)
         butt.place(x=150, y=50)
+
+        butt = Button(self, text='chat', width=12, height=2, command=self.b0atychat)
+        butt.place(x=250, y=0)
 
 top = Tk()
 top.geometry("400x300")
