@@ -3,7 +3,7 @@ from tkinter import *
 import threading
 
 ls = 'C:\\Users\\scrsm\\AppData\\Local\\Programs\\Python\\Python37-32\\Scripts\\livestreamer.exe twitch.tv/_ best'
-streamers = ['alkaizerx','b0aty','joniosan']
+streamers = ['alkaizerx','b0aty','joniosan','cutedog_','rigondeaux','rexitus']
 
 class Window(Frame):
 
