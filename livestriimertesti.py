@@ -2,6 +2,9 @@ import os, webbrowser
 from tkinter import *
 import threading
 
+ls = 'C:\\Users\\scrsm\\AppData\\Local\\Programs\\Python\\Python37-32\\Scripts\\livestreamer.exe twitch.tv/_ best'
+streamers = ['alkaizerx','b0aty','joniosan']
+
 class Window(Frame):
 
     def __init__(self, master=None):
@@ -11,7 +14,7 @@ class Window(Frame):
 
     def handle_stream(self, streamer):
         def openstream():
-            os.system('C:\\Users\\scrsm\\AppData\\Local\\Programs\\Python\\Python37-32\\Scripts\\livestreamer.exe twitch.tv/'+streamer+' best')
+            os.system(ls.replace('_', streamer))
         t = threading.Thread(target=openstream)
         t.start()
 
@@ -23,23 +26,13 @@ class Window(Frame):
         self.master.title(':^)')
         self.pack(fill=BOTH, expand=1)
 
-        butt = Button(self, text='alkaizerX', width=12, height=2, command=lambda: self.handle_stream('alkaizerx'))
-        butt.place(x=100, y=0)
-
-        butt = Button(self, text='chat', width=12, height=2, command=lambda: self.open_chat('alkaizerx'))
-        butt.place(x=200, y=0)
-
-        butt = Button(self, text='b0aty', width=12, height=2, command=lambda: self.handle_stream('b0aty'))
-        butt.place(x=100, y=50)
-
-        butt = Button(self, text='chat', width=12, height=2, command=lambda: self.open_chat('b0aty'))
-        butt.place(x=200, y=50)
-
-        butt = Button(self, text='joniosan', width=12, height=2, command=lambda: self.handle_stream('joniosan'))
-        butt.place(x=100, y=100)
-
-        butt = Button(self, text='chat', width=12, height=2, command=lambda: self.open_chat('joniosan'))
-        butt.place(x=200, y=100)
+        yy = 0
+        for x in streamers:
+            butt = Button(self, text=x, width=12, height=2, command=lambda x=x: self.handle_stream(x))
+            butt.place(x=100, y=yy)
+            butt = Button(self, text='chat', width=12, height=2, command=lambda x=x: self.open_chat(x))
+            butt.place(x=200, y=yy)
+            yy += 50
 
 top = Tk()
 top.geometry("400x300")
