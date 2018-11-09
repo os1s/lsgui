@@ -1,9 +1,12 @@
 import os, webbrowser
 from tkinter import *
 import threading
+import urllib.request
+import json
 
+myid = os.environ.get('TwitchClientID')
 ls = 'C:\\Users\\scrsm\\AppData\\Local\\Programs\\Python\\Python37-32\\Scripts\\livestreamer.exe twitch.tv/_ best'
-streamers = ['alkaizerx','b0aty','joniosan','cutedog_','rigondeaux','rexitus']
+streamers = ['aphirefly','b0aty','alkaizerx','cutedog_','rigondeaux', 'joniosan','nl_kripp']
 
 class Window(Frame):
 
@@ -21,6 +24,14 @@ class Window(Frame):
     def open_chat(self, streamer):
         webbrowser.open('https://www.twitch.tv/popout/'+streamer+'/chat')
 
+    def streamer_online(self, streamer):
+        content = json.load(urllib.request.urlopen('https://api.twitch.tv/kraken/streams/'+streamer+'?client_id='+myid))
+        online = str(content.get('stream'))
+        if online == 'None':
+            return False
+        else:
+            return True
+
     def init_window(self):
 
         self.master.title(':^)')
@@ -28,13 +39,26 @@ class Window(Frame):
 
         yy = 0
         for x in streamers:
-            butt = Button(self, text=x, width=12, height=2, command=lambda x=x: self.handle_stream(x))
-            butt.place(x=100, y=yy)
-            butt = Button(self, text='chat', width=12, height=2, command=lambda x=x: self.open_chat(x))
-            butt.place(x=200, y=yy)
+
+            if self.streamer_online(x):
+                butt_colour = 'green'
+            else:
+                butt_colour = 'grey'
+
+            butt = Button(self, text=x, width=10, height=2, bg=butt_colour, command=lambda x=x: self.handle_stream(x))
+            butt.place(x=10, y=yy)
+            butt = Button(self, text='chat', width=10, height=2, bg=butt_colour, command=lambda x=x: self.open_chat(x))
+            butt.place(x=110, y=yy)
             yy += 50
 
+        lab = Label(text="Streamer:")
+        lab.place(x=30, y=yy)
+        ent = Entry(top)
+        ent.bind("<Return>", lambda event: self.handle_stream(ent.get()))
+        ent.place(x=100, y=yy, width=80, height=20)
+
+
 top = Tk()
-top.geometry("400x300")
+top.geometry("200x500")
 app = Window(top)
 top.mainloop()
