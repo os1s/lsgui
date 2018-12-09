@@ -1,1 +1,1 @@
-bad&simple livestreamer gui for myself
+bad&simple streamlink gui for myself

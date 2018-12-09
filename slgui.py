@@ -5,7 +5,7 @@ import urllib.request
 import json
 
 myid = os.environ.get('TwitchClientID')
-ls = 'C:\\Users\\scrsm\\AppData\\Local\\Programs\\Python\\Python37-32\\Scripts\\livestreamer.exe twitch.tv/_ best'
+ls = 'streamlink twitch.tv/_ best'
 streamers = ['aphirefly','b0aty','alkaizerx','cutedog_','rigondeaux', 'joniosan','nl_kripp']
 
 class Window(Frame):
